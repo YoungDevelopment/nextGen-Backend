@@ -1,4 +1,6 @@
 flask
+gunicorn
+flask-cors
 supabase
 python-dotenv
 # Cryptographic operations

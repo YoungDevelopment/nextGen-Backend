@@ -11,7 +11,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # OTP Logging & Update
-def log_otp_to_supabase(uid: str, machine_ip: str, cellular_ip: str, cipher_text: str, otp: str) -> Optional[Dict]:
+def log_otp_to_supabase(uid: str, machine_ip: str, cellular_ip: str, cipher_text: str, otp: str, iv: Optional[str] = None, tag: Optional[str] = None) -> Optional[Dict]:
     record = {
         "UID": uid,
         "Machine_IP": machine_ip,
@@ -20,15 +20,19 @@ def log_otp_to_supabase(uid: str, machine_ip: str, cellular_ip: str, cipher_text
         "OTP": otp,
         "Useable": True,
         "Success": False,
-        
     }
+
+    # Add IV and tag if provided
+    if iv:
+        record["iv"] = iv
+    if tag:
+        record["tag"] = tag
+
     try:
         response = supabase.table("OTP_Handle").insert(record).execute()
         return response.data[0] if response.data else None
     except Exception as e:
         print(f"Error logging OTP: {str(e)}")
-        return None
-
 def mark_otp_unusable_by_uid(uid: str) -> bool:
     try:
         response = supabase.table("OTP_Handle") \
@@ -94,7 +98,6 @@ def get_public_key_from_supabase(client: Client, uid: str) -> Optional[str]:
     except Exception as e:
         print(f"Error fetching public key: {str(e)}")
         return None
-
 
 def check_otp_status(cipher_text: str, uid: str) -> Optional[bool]:
     try:
