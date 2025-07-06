@@ -24,6 +24,6 @@ PUBLIC_KEY_FILE = "ecc_public_key.pem"
 # QR code settings
 QR_CODE_FILENAME = "otp_qr_code.png"
 
-# Create directories if they don't exist
-KEYS_DIR.mkdir(exist_ok=True)
-OUTPUT_DIR.mkdir(exist_ok=True)
+
+KEYS_DIR = Path("/tmp/keys")
+KEYS_DIR.mkdir(parents=True, exist_ok=True)
