@@ -105,7 +105,6 @@ def check_otp_status(cipher_text: str, uid: str) -> Optional[bool]:
             .select("Success") \
             .eq("Cipher_Text", cipher_text) \
             .eq("UID", uid) \
-            .eq("Useable", True) \
             .execute()
         if response.data and len(response.data) > 0:
             success = response.data[0].get("Success")
