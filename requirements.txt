@@ -3,14 +3,6 @@ gunicorn
 flask-cors
 supabase
 python-dotenv
-# Cryptographic operations
 cryptography>=41.0.0
-
-# QR code generation
 qrcode[pil]>=7.4.0
-
-# Image processing (automatically installed with qrcode[pil])
 Pillow>=10.0.0
-
-# Optional: For enhanced security
-secrets  # Built-in Python module (no installation needed)
