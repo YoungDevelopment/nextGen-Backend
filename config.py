@@ -15,7 +15,7 @@ HKDF_INFO = b'handshake data'
 # File paths
 BASE_DIR = Path(__file__).parent
 KEYS_DIR = BASE_DIR / "keys"
-OUTPUT_DIR = Path(r"C:\Users\ABdullah\OneDrive - Gcs Inc\Documents\QR")
+OUTPUT_DIR = Path(r"/tmp/QR")
 
 # Key file names
 PRIVATE_KEY_FILE = "ecc_private_key.pem"
