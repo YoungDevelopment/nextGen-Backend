@@ -64,7 +64,6 @@ class QRCodeGenerator:
         
         # Save to file
         output_path = self.output_dir / filename
-        img.save(output_path)
         
         return str(output_path)
     
